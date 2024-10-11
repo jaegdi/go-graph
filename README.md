@@ -2,7 +2,9 @@
 
 ## SYNOPSIS
 
+```
 go-graph   [-s | -silent]  [-h | -help]
+```
 
 ## Description
 
