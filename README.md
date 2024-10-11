@@ -11,8 +11,10 @@ with the HTML-file, if not the parameter -s|-silent is set.
 
 ## Parameters
 
+```
   -s | -silent       Don't open the browser, only generate the html file.
   -h | -help         Show help
+```
 
 ## Build
 
