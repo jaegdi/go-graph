@@ -13,7 +13,9 @@ import (
 	"github.com/go-echarts/go-echarts/v2/opts"
 )
 
+// generateGraphFile executes the 'go mod graph' command and saves the output to a file
 func generateGraphFile() {
+	// Execute the 'go mod graph' command
 	cmd := exec.Command("go", "mod", "graph")
 	output, err := cmd.Output()
 	if err != nil {
@@ -21,7 +23,7 @@ func generateGraphFile() {
 		return
 	}
 
-	// Write the output to go.graph file
+	// Write the output to the go.graph file
 	err = os.WriteFile("go.graph", output, 0644)
 	if err != nil {
 		fmt.Println("Error writing go.graph file:", err)
@@ -31,10 +33,12 @@ func generateGraphFile() {
 	fmt.Println("go.graph file generated successfully.")
 }
 
+// openBrowser opens the specified URL in the system's default browser
 func openBrowser(url string) error {
 	var cmd string
 	var args []string
 
+	// Determine the command based on the operating system
 	switch runtime.GOOS {
 	case "windows":
 		cmd = "cmd"
@@ -49,18 +53,22 @@ func openBrowser(url string) error {
 }
 
 func main() {
+	// Generate the go.graph file
 	generateGraphFile()
-	// Lesen der go.graph Datei
+
+	// Open and read the go.graph file
 	file, err := os.Open("go.graph")
 	if err != nil {
-		fmt.Println("Fehler beim Öffnen der Datei:", err)
+		fmt.Println("Error opening file:", err)
 		return
 	}
 	defer file.Close()
 
+	// Initialize data structures for nodes and links
 	nodes := make(map[string]bool)
 	var links []opts.GraphLink
 
+	// Read and process each line of the file
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		parts := strings.Split(scanner.Text(), " ")
@@ -73,6 +81,7 @@ func main() {
 		}
 	}
 
+	// Create graph nodes with random positions
 	var graphNodes []opts.GraphNode
 	for node := range nodes {
 		graphNodes = append(graphNodes, opts.GraphNode{
@@ -86,6 +95,7 @@ func main() {
 	// Create a new graph instance
 	graph := charts.NewGraph()
 
+	// Set global options for the graph
 	graph.SetGlobalOptions(
 		charts.WithTitleOpts(opts.Title{
 			Title: "Go Dependencies",
@@ -97,6 +107,7 @@ func main() {
 		}),
 	)
 
+	// Add data and options to the graph
 	graph.AddSeries("graph", graphNodes, links,
 		charts.WithGraphChartOpts(
 			opts.GraphChart{
@@ -124,7 +135,7 @@ func main() {
 		}),
 	)
 
-	// Save as HTML
+	// Save the graph as an HTML file
 	htmlFile := "go_dependencies.html"
 	f, _ := os.Create(htmlFile)
 	graph.Render(f)
