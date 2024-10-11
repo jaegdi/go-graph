@@ -18,4 +18,9 @@ with the HTML-file, if not the parameter -s|-silent is set.
 ```sh
 go mod tidy
 go build
+copy the binary go-graph to /usr/local/bin or an other directory in your search path
 ```
+
+## Usage
+
+Cd into the base directory of your go project and call go-graph
