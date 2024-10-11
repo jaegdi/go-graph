@@ -1,0 +1,9 @@
+go-graph github.com/go-echarts/go-echarts/v2@v2.4.3
+go-graph go@1.23.2
+github.com/go-echarts/go-echarts/v2@v2.4.3 github.com/stretchr/testify@v1.6.0
+github.com/go-echarts/go-echarts/v2@v2.4.3 github.com/davecgh/go-spew@v1.1.1
+github.com/go-echarts/go-echarts/v2@v2.4.3 github.com/kr/pretty@v0.1.0
+github.com/go-echarts/go-echarts/v2@v2.4.3 github.com/pmezard/go-difflib@v1.0.0
+github.com/go-echarts/go-echarts/v2@v2.4.3 gopkg.in/check.v1@v1.0.0-20180628173108-788fd7840127
+github.com/go-echarts/go-echarts/v2@v2.4.3 gopkg.in/yaml.v3@v3.0.0
+go@1.23.2 toolchain@go1.23.2
